@@ -18,11 +18,11 @@
     <section id="main" v-show="todos.length > 0" v-cloak>
       <input id="toggle-all" type="checkbox" v-model="allStatus">
       <ul id="todo-list">
-        <li class="todo" v-for="todo in filteredTodos" :class="{completed: todo.completed, editing: todo == editingTodo}">
+        <li class="todo" v-for="todo in filteredTodos" :class="{completed: todo.completed, editing: todo == editingTodo}" :key="todo.id">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
             <label @dblclick="edit(todo)">{{todo.title}}</label>
-            <button class="destroy" @click="remove(todo)"></button>
+            <button class="destroy" @click="remove(todo.id)"></button>
           </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editingTodo" @blur="update(todo)" @keyup.enter="update(todo)" @keyup.esc="cancelEdit(todo)">
         </li>

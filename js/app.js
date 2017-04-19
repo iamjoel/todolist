@@ -15,7 +15,6 @@
       })
     }
   }
-
   exports.app = new Vue({
     el: '#todoapp',
     data: {
@@ -49,16 +48,19 @@
       }
     },
     methods: {
+      // 新增
       create: function() {
         var title = this.newTodo.trim()
         if (title) {
           this.todos.push({
+            id: Date.now(),// 用当前时间戳做为id
             title: title,
             completed: false
           })
         }
         this.newTodo = ''
       },
+      // 进入编辑的状态
       edit: function(todo) {
         this.beforeEditCache = todo.title
         this.editingTodo = todo
@@ -67,6 +69,7 @@
         this.editingTodo = null
         todo.title = this.beforeEditCache
       },
+      // 修改
       update: function(todo) {
         if (!this.editingTodo) {
           return
@@ -74,11 +77,14 @@
         this.editingTodo = null
         todo.title = todo.title.trim()
         if (!todo.title) {
-          this.remove(todo)
+          this.remove(todo.id)
         }
       },
-      remove: function(todo) {
-        this.todos.$remove(todo)
+      // 删除
+      remove: function(id) {
+        this.todos = this.todos.filter(function(todo) {
+          return todo.id !== id
+        })
       },
       removeAllCompleted: function() {
         this.todos = filters.active(this.todos)
@@ -92,8 +98,8 @@
       }
     },
     /*
-    * 自定义指令 https://cn.vuejs.org/v2/guide/custom-directive.html
-    */
+     * 自定义指令 https://cn.vuejs.org/v2/guide/custom-directive.html
+     */
     directives: {
       // 编辑todo时，让 input 获得焦点
       'todo-focus': function(el, bind) {
