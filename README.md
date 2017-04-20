@@ -1,5 +1,5 @@
 # 待办适宜
-这是一个用[Vue.js](https://cn.vuejs.org/) 做的练手项目。在演示，点[这里](https://iamjoel.github.io/todolist/)。
+这是一个用[Vue.js](https://cn.vuejs.org/) 做的练手项目。在线演示，点[这里](https://iamjoel.github.io/todolist/)。
 
 先来几张图片。  
 默认的外观：  
